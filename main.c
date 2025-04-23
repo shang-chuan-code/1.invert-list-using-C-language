@@ -2,7 +2,7 @@
  * @Author: shangchuan shangchuan97@163.com
  * @Date: 2025-04-21 22:17:04
  * @LastEditors: shangchuan shangchuan97@163.com
- * @LastEditTime: 2025-04-22 22:08:45
+ * @LastEditTime: 2025-04-23 22:25:37
  * @FilePath: \1.invert-list-using-C-language\main.c
  */
 #include <stdio.h>
@@ -65,6 +65,31 @@ void printf_list(Node* head)
 }
 
 
+/**
+ * @description: 就地翻转
+ * @param {Node} *head
+ * @return {*}
+ */
+Node* inverse_list(Node *head)
+{
+    Node *pre = head;
+    Node *cur = head->next;
+
+    while (NULL != cur)
+    {
+        pre->next = cur->next;
+        cur->next = head;
+        head = cur;
+        cur = pre->next;
+    }
+
+    return head; 
+    
+}
+
+
+
+
 int main()
 {
     Node *head = NULL;
@@ -72,7 +97,10 @@ int main()
     tail = list_add_tail(&head, 1);
     tail = list_add_tail(&tail, 2);
     tail = list_add_tail(&tail, 3);
-    tail = list_add_tail(&tail, 3);
+    tail = list_add_tail(&tail, 4);
+    tail = list_add_tail(&tail, 5);
+    printf_list(head);
+    head = inverse_list(head);
     printf_list(head);
 
 }
